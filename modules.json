@@ -58,5 +58,10 @@
     "nr": "CS2301",
     "name": "Nebenläufige und verteilte Programme",
     "crp": 6
+  },
+  {
+    "nr": "SM2505",
+    "name": "Audio-Podcasting",
+    "crp": 3
   }
 ]
