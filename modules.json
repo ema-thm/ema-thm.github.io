@@ -63,5 +63,10 @@
     "nr": "SM2505",
     "name": "Audio-Podcasting",
     "crp": 3
+  },
+  {
+    "nr": "SM2001",
+    "name": "Audiovisuelle Medien",
+    "crp": 6
   }
 ]
