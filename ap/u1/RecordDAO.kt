@@ -23,7 +23,7 @@ class RecordDAO(private val ctx: Context) {
 
     /**
      * Persistiert das übergebene [Record] Objekt und liefert die neue id zurück.
-     *(Seiteneffekte: record.id = nextId; nextId += 1 )
+     * (Seiteneffekte: record.id = nextId; nextId += 1 )
      *
      * @param record
      * @return neue record id
@@ -46,7 +46,9 @@ class RecordDAO(private val ctx: Context) {
                 ObjectInputStream(fin).readObject().let { obj ->
                     records.addAll(obj as MutableList<Record>)
                     // init next id
-                    nextId = records.maxOf { it.id ?: 0 } + 1
+                    if (records.size > 0) {
+                        nextId = records.maxOf { it.id ?: 0 } + 1
+                    }
                 }
 
             }
