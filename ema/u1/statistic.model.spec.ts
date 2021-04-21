@@ -9,14 +9,14 @@ describe('Statistic', () => {
     new Record(2, 'MN1007', 'Diskrete Mathematik', 6, 81, true, false, 2016),
   ];
 
-  const stats2Records = new Statistic(records);
+  const stats2Records = new Statistic(Array.from(records));
 
   records.push(
       new Record(3, 'CS1019', 'Compilerbau', 6, 81, false, false, 2017),
       new Record(4, 'CS1020', 'Datenbanksysteme', 6, 92, false, false, 2017)
   );
 
-  const stats4Records = new Statistic(records);
+  const stats4Records = new Statistic(Array.from(records));
 
   it('should create an instance', () => {
     expect(statsNoRecords).toBeTruthy();

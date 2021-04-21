@@ -32,6 +32,11 @@ describe('RecordService', () => {
     expect(recordService).toBeTruthy();
   });
 
+  it('persists records', () => {
+    testRecords.forEach(r => recordService.persist(r));
+    expect(recordService.findAll().length).toBe(testRecords.length);
+  });
+
   it('finds all records', () => {
     expect(recordService.findAll().length).toBe(0);
     insertTestData();
@@ -52,28 +57,23 @@ describe('RecordService', () => {
     expect(recordService.findById(getMaxId() + 1)).toBeFalsy();
   });
 
-  it('persists records', () => {
-    testRecords.forEach(r => recordService.persist(r));
-    expect(recordService.findAll().length).toBe(testRecords.length);
-  });
-
   it('updates records', () => {
     insertTestData();
     recordService.findAll()
-      .forEach((r, idx) => {
-        const update = new Record();
-        update.id = r.id;
-        update.moduleNr = 'TEST UPDATE ' + idx;
-        update.moduleName = 'TEST UPDATE ' + idx;
-        update.crp = 15;
-        update.grade = 50;
-        update.year = 2000 + idx;
+        .forEach((r, idx) => {
+          const update = new Record();
+          update.id = r.id;
+          update.moduleNr = 'TEST UPDATE ' + idx;
+          update.moduleName = 'TEST UPDATE ' + idx;
+          update.crp = 15;
+          update.grade = 50;
+          update.year = 2000 + idx;
 
-        expect(recordService.update(update)).toBeTrue();
+          expect(recordService.update(update)).toBeTrue();
 
-        const record = recordService.findById(r.id);
-        Object.keys(record).forEach(key => expect(record[key]).toBe(update[key]));
-      });
+          const record = recordService.findById(r.id);
+          Object.keys(record).forEach(key => expect(record[key]).toBe(update[key]));
+        });
   });
 
   it('doesn\'t update unknown record', () => {
