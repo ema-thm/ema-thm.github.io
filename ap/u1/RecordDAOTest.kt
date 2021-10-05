@@ -93,12 +93,13 @@ class RecordDAOTest {
 
   companion object {
     private val TEST_RECORDS = mutableListOf<Record>()
-    private val RECORD_DAO = RecordDAO(InstrumentationRegistry.getInstrumentation().targetContext)
+    private val RECORD_DAO =
+      RecordDAO.get(InstrumentationRegistry.getInstrumentation().targetContext)
 
     @BeforeClass
     @JvmStatic
     fun initTestData() {
-      TEST_RECORDS.add(Record("CS1013 TEST", "Objektorientierte Programmierung TEST",2016,true,true,6,73))
+      TEST_RECORDS.add(Record("CS1013 TEST", "Objektorientierte Programmierung TEST", 2016, true, true, 6, 73))
       TEST_RECORDS.add(Record("MN1007 TEST", "Diskrete Mathematik TEST", 2016, false, true, 6, 81))
       TEST_RECORDS.add(Record("CS1019 TEST", "Compilerbau TEST", 2017, false, false, 6, 81))
       TEST_RECORDS.add(Record("CS1020 TEST", "Datenbanksysteme TEST", 2017, false, false, 6, 92))
