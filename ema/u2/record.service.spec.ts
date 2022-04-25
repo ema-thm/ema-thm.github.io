@@ -11,17 +11,9 @@ describe('RecordService', () => {
     new Record(null, 'TEST-NR', 'TEST-NAME', 9, 66, false, false, 2018),
   ];
 
-  function insertTestData() {
-    testRecords.forEach(r => recordService.persist(r));
-  }
-
-  function getRecordIds() {
-    return recordService.findAll().map(r => r.id);
-  }
-
-  function getMaxId() {
-    return getRecordIds().reduce((max, val) => val > max ? val : max, 0);
-  }
+  const insertTestData = () => testRecords.forEach(r => recordService.persist(r));
+  const getRecordIds = () => recordService.findAll().map(r => r.id);
+  const getMaxId = () => getRecordIds().reduce((max, val) => val > max ? val : max, 0);
 
   beforeEach(() => {
     // clear test data
