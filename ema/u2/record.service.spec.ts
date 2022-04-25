@@ -10,7 +10,6 @@ describe('RecordService', () => {
     new Record(null, 'TEST-NR', 'TEST-NAME', 9, 56, false, true, 2017),
     new Record(null, 'TEST-NR', 'TEST-NAME', 9, 66, false, false, 2018),
   ];
-
   const insertTestData = () => testRecords.forEach(r => recordService.persist(r));
   const getRecordIds = () => recordService.findAll().map(r => r.id);
   const getMaxId = () => getRecordIds().reduce((max, val) => val > max ? val : max, 0);
