@@ -23,7 +23,7 @@ class RecordDAO private constructor(private val ctx: Context) {
 
   /**
    * Persistiert das übergebene [Record] Objekt und liefert die neue id zurück.
-   * (Seiteneffekte: record.id = nextId; nextId += 1 )
+   * (Seiteneffekte: nextId += 1 )
    *
    * @param record
    * @return neue record id
@@ -52,8 +52,14 @@ class RecordDAO private constructor(private val ctx: Context) {
         }
 
       }
+    } else {
+      // add some test records
+      records.addAll(createTestRecords(nextId))
+      nextId = records.maxOf { it.id ?: 0 } + 1
+      saveRecords(records)
     }
-    return records;
+
+    return records
   }
 
   private fun saveRecords() {
@@ -63,6 +69,25 @@ class RecordDAO private constructor(private val ctx: Context) {
 
   companion object {
     private const val FILE_NAME = "records.obj"
+
+    fun createTestRecords(startId: Int = 1): List<Record> {
+      var nextId = startId
+      return listOf(
+        Record(
+          id = nextId++,
+          moduleNum = "CS1013",
+          moduleName = "Objektorientierte Programmierung",
+          year = 2016,
+          isSummerTerm = true,
+          isHalfWeighted = true,
+          crp = 6,
+          mark = 73
+        ),
+        Record(nextId++, "MN1007", "Diskrete Mathematik", 2016, false, true, 6, 81),
+        Record(nextId++, "CS1019", "Compilerbau", 2017, false, false, 6, 81),
+        Record(nextId, "CS1020", "Datenbanksysteme", 2017, false, false, 6, 92)
+      )
+    }
 
     @SuppressLint("StaticFieldLeak")
     @Volatile

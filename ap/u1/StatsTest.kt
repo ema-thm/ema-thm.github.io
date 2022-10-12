@@ -35,10 +35,19 @@ class StatsTest {
     fun setUp() {
       STATS = Stats(
         listOf(
-          Record("CS1013", "Objektorientierte Programmierung", 2016, true, true, 6, 73),
-          Record("MN1007", "Diskrete Mathematik", 2016, false, true, 6, 81),
-          Record("CS1019", "Compilerbau", 2017, false, false, 6, 81),
-          Record("CS1020", "Datenbanksysteme", 2017, false, false, 6, 92)
+          Record(
+            id = null,
+            moduleNum = "CS1013",
+            moduleName = "Objektorientierte Programmierung",
+            year = 2016,
+            isSummerTerm = true,
+            isHalfWeighted = true,
+            crp = 6,
+            mark = 73
+          ),
+          Record(null, "MN1007", "Diskrete Mathematik", 2016, false, true, 6, 81),
+          Record(null, "CS1019", "Compilerbau", 2017, false, false, 6, 81),
+          Record(null, "CS1020", "Datenbanksysteme", 2017, false, false, 6, 92)
         )
       )
     }

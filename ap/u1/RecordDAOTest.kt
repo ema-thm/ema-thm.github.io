@@ -3,7 +3,7 @@ package de.thm.ap.records
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
 import de.thm.ap.records.model.Record
-import de.thm.ap.records.persistence.RecordDAO
+import de.thm.ap.records.data.RecordDAO
 import org.junit.*
 import org.junit.runner.RunWith
 
@@ -17,7 +17,9 @@ class RecordDAOTest {
 
   @After
   fun deleteTestData() {
-    TEST_RECORDS.forEach { RECORD_DAO.delete(it) }
+    RECORD_DAO.findAll()
+      .filter { it.moduleNum?.contains("TEST") ?: false }
+      .forEach { RECORD_DAO.delete(it) }
   }
 
   @Test
@@ -43,13 +45,14 @@ class RecordDAOTest {
     val record = records.firstOrNull { moduleNum == it.moduleNum }
     Assert.assertNotNull(record)
 
-    record?.let {
-      it.moduleName = "modified! $it.moduleName"
-      it.year = 2015
-      it.isSummerTerm = true
-      it.isHalfWeighted = false
-      it.crp = 3
-      it.mark = 51
+    record?.copy(
+      moduleName = "modified! ${record.moduleName}",
+      year = 2013,
+      isSummerTerm = true,
+      isHalfWeighted = false,
+      crp = 3,
+      mark = 51,
+    )?.let {
       Assert.assertTrue(RECORD_DAO.update(it))
 
       val recordUpdate = RECORD_DAO.findById(record.id!!)
@@ -64,21 +67,30 @@ class RecordDAOTest {
       Assert.assertEquals(it.mark, recordUpdate?.mark)
 
       val recordNoId =
-        Record("CS1016 TEST", "Programmierung interaktiver Systeme TEST", 2016, true, true, 6, 95)
+        Record(
+          null,
+          "CS1016 TEST",
+          "Programmierung interaktiver Systeme TEST",
+          2016,
+          true,
+          true,
+          6,
+          95
+        )
       Assert.assertFalse(RECORD_DAO.update(recordNoId))
     }
   }
 
   @Test
   fun persist() {
-    val record = Record("CS1022 TEST", "Betriebssysteme TEST", 2017, false, false, 6, 90)
+    val record = Record(null, "CS1022 TEST", "Betriebssysteme TEST", 2017, false, false, 6, 90)
     val newId = RECORD_DAO.persist(record)
 
     val recordNew = RECORD_DAO.findById(newId)
     Assert.assertNotNull(recordNew)
 
     recordNew?.let {
-      Assert.assertEquals(record.id, it.id)
+      Assert.assertEquals(newId, it.id)
       Assert.assertEquals(record.moduleNum, it.moduleNum)
       Assert.assertEquals(record.moduleName, it.moduleName)
       Assert.assertEquals(record.year, it.year)
@@ -99,10 +111,43 @@ class RecordDAOTest {
     @BeforeClass
     @JvmStatic
     fun initTestData() {
-      TEST_RECORDS.add(Record("CS1013 TEST", "Objektorientierte Programmierung TEST", 2016, true, true, 6, 73))
-      TEST_RECORDS.add(Record("MN1007 TEST", "Diskrete Mathematik TEST", 2016, false, true, 6, 81))
-      TEST_RECORDS.add(Record("CS1019 TEST", "Compilerbau TEST", 2017, false, false, 6, 81))
-      TEST_RECORDS.add(Record("CS1020 TEST", "Datenbanksysteme TEST", 2017, false, false, 6, 92))
+      TEST_RECORDS.add(
+        Record(
+          id = null,
+          moduleNum = "CS1013 TEST",
+          moduleName = "Objektorientierte Programmierung TEST",
+          year = 2016,
+          isSummerTerm = true,
+          isHalfWeighted = true,
+          crp = 6,
+          mark = 73
+        )
+      )
+      TEST_RECORDS.add(
+        Record(
+          null,
+          "MN1007 TEST",
+          "Diskrete Mathematik TEST",
+          2016,
+          false,
+          true,
+          6,
+          81
+        )
+      )
+      TEST_RECORDS.add(Record(null, "CS1019 TEST", "Compilerbau TEST", 2017, false, false, 6, 81))
+      TEST_RECORDS.add(
+        Record(
+          null,
+          "CS1020 TEST",
+          "Datenbanksysteme TEST",
+          2017,
+          false,
+          false,
+          6,
+          92
+        )
+      )
     }
   }
 }
