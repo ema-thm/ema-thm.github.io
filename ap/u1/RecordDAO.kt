@@ -1,4 +1,4 @@
-package de.thm.ap.records.persistence
+package de.thm.ap.records.data
 
 import android.content.Context
 import de.thm.ap.records.model.Record
