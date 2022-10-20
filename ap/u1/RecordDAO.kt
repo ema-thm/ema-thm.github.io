@@ -1,5 +1,6 @@
 package de.thm.ap.records.data
 
+import android.annotation.SuppressLint
 import android.content.Context
 import de.thm.ap.records.model.Record
 import java.io.ObjectInputStream
@@ -62,10 +63,10 @@ class RecordDAO private constructor(private val ctx: Context) {
     return records
   }
 
-  private fun saveRecords() {
-    ctx.openFileOutput(FILE_NAME, Context.MODE_PRIVATE)
-      .use { ObjectOutputStream(it).writeObject(records) }
-  }
+  private fun saveRecords(records: List<Record> = this.records) {
+      ctx.openFileOutput(FILE_NAME, Context.MODE_PRIVATE)
+        .use { ObjectOutputStream(it).writeObject(records) }
+    }
 
   companion object {
     private const val FILE_NAME = "records.obj"
