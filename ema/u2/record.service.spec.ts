@@ -11,7 +11,7 @@ describe('RecordService', () => {
     new Record(null, 'TEST-NR', 'TEST-NAME', 9, 66, false, false, 2018),
   ];
   const insertTestData = () => testRecords.forEach(r => recordService.persist(r));
-  const getRecordIds = () => recordService.findAll().map(r => r.id);
+  const getRecordIds = () => recordService.findAll().map(r => r.id ?? 0);
   const getMaxId = () => getRecordIds().reduce((max, val) => val > max ? val : max, 0);
 
   beforeEach(() => {
@@ -38,7 +38,7 @@ describe('RecordService', () => {
     insertTestData();
     getRecordIds().forEach(id => {
       const record = recordService.findById(id);
-      expect(record.id).toBe(id);
+      expect(record?.id).toBe(id);
     });
   });
 
@@ -62,8 +62,13 @@ describe('RecordService', () => {
 
           expect(recordService.update(update)).toBeTrue();
 
-          const record = recordService.findById(r.id);
-          Object.keys(record).forEach(key => expect(record[key]).toBe(update[key]));
+          const record = recordService.findById(r.id ?? -1);
+          if(record) {
+            Object.keys(record).forEach(key => expect(record[key]).toBe(update[key]));
+          }else{
+            expect(record).not.toBeUndefined()
+          }
+
         });
   });
 
