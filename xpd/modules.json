@@ -1,0 +1,28 @@
+[
+    {
+      "number": "CS1019",
+      "name": "Compilerbau",
+      "crp": 6
+    },
+    {
+      "number": "CS1022",
+      "name": "Betriebssysteme",
+      "crp": 6
+    },
+    {
+      "number": "CS1013",
+      "name": "Objektorientierte Programmierung",
+      "crp": 6
+    },
+    {
+      "number": "MN1007",
+      "name": "Diskrete Mathematik",
+      "crp": 6
+    },
+    {
+      "number": "CS1014",
+      "name": "Grundlagen der Informatik",
+      "crp": 6
+    }
+  ]
+  
