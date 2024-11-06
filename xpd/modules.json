@@ -30,22 +30,22 @@
     "crp": 6
   },
   {
-    "nr": "CS1015",
+    "number": "CS1015",
     "name": "Rechnernetze und ihre Anwendung",
     "crp": 6
   },
   {
-    "nr": "CS1017",
+    "number": "CS1017",
     "name": "Algorithmen und Datenstrukturen",
     "crp": 6
   },
   {
-    "nr": "BA1004",
+    "number": "BA1004",
     "name": "DV-orientierte Betriebswirtschaftslehre",
     "crp": 3
   },
   {
-    "nr": "CS1024",
+    "number": "CS1024",
     "name": "Internetbasierte Systeme",
     "crp": 6
   }
