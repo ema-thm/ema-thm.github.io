@@ -53,5 +53,10 @@
     "number": "INF1005",
     "name": "Praktische Informatik 1",
     "crp": 6
+  },
+  {
+    "number": "INF1006",
+    "name": "Praktische Informatik 2",
+    "crp": 6
   }
 ]
