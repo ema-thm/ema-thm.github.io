@@ -48,5 +48,10 @@
     "number": "CS1024",
     "name": "Internetbasierte Systeme",
     "crp": 6
+  },
+  {
+    "number": "INF1005",
+    "name": "Praktische Informatik 1",
+    "crp": 6
   }
 ]
